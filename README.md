@@ -41,9 +41,9 @@
 ・積み上げ式の誤差ではなく、初期設定された持ち点から誤差分を引いていき、何問続けられるかのモードを取り入れる。
 
 ## ■ 技術スタック
-・フロントエンド　　Bootstrap、Vue.js
+・フロントエンド　　Bootstrap
 ・バックエンド　　Ruby on Rails
-・インフラ　AWS
 ・DB Postgre SQL
 ・環境構築　Docker
 ・認証機能　Devise
+・デプロイ　Render
