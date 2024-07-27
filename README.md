@@ -37,6 +37,7 @@
 　┗ユーザー管理画面：　ユーザーの一覧、詳細、編集、削除
 　┗クイズ管理画面　：　クイズ一覧の表示、作成、編集、削除
 　┗ランキング管理画面：　ランキングの一覧、期間別ランキングの表示
+・ゲームプレイ機能
 ・画像保存機能（Amazon S3・Active Storageを利用）
 
 ## ■ MVP後に追加予定の機能
@@ -59,3 +60,7 @@
 ・D3.js      ：　クイズ画面で対象の都道府県の色塗り画像を表示（日本地図に色塗り）
 ・Sidekiq（※）：　クイズの出題を統計データ（https://dashboard.e-stat.go.jp/static/api）にwebAPIを活用し、バックグラウンドで処理する
 　※実装が難しそうなので、MVP後に機能追加予定
+
+### 画面遷移図
+https://www.figma.com/design/ubNVpFbPp1f4YXLfdSrxES/Population-Pop-Puzzle?node-id=0-1&t=r8Mvx50mkDFgyYJX-0
+
