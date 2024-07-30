@@ -61,5 +61,8 @@
 ・Sidekiq（※）：　クイズの出題を統計データ（https://dashboard.e-stat.go.jp/static/api）にwebAPIを活用し、バックグラウンドで処理する
 　※実装が難しそうなので、MVP後に機能追加予定
 
-### 画面遷移図
+## ■ 画面遷移図
 https://www.figma.com/design/ubNVpFbPp1f4YXLfdSrxES/Population-Pop-Puzzle?node-id=0-1&t=6Qe2RYsFfKbJjycX-0
+
+## ■ ER図
+https://app.diagrams.net/#G1j6erewncgGMvA-wyywKh5Lk69PMy91_s#{"pageId"%3A"R2lEEEUBdFMjLlhIrx00"}
