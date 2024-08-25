@@ -43,7 +43,7 @@
       </div>
 
       <div style="margin-top: 50px;"></div>
-      
+
       <h2 style="font-size: 1.25em;">【選択していない都道府県】</h2>
       <div class="row">
         <% @all_options.each do |option| %>
@@ -56,7 +56,7 @@
       </div>
 
       <div style="margin-top: 20px;"></div>
-      
+
       <% if params[:question_count].to_i >= 3 %>
       <div style="background-color: #f0f8ff; border: 2px solid #000; padding: 20px; font-family: 'Arial', sans-serif; text-align: center;">
         <p style="font-size: 1.5em; font-weight: bold;">合計ズレ: <%= (@total_difference / 10_000.0).round(1) %>万人</p>
