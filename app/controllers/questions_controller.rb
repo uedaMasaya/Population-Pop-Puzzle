@@ -5,9 +5,11 @@ class QuestionsController < ApplicationController
   end
 
   def result
-    question_prefecture = Prefecture.find(params[:question_prefecture_id])
-    selected_prefectures = Prefecture.where(id: params[:answers])
-    total_population = selected_prefectures.sum(:population)
-    @difference = (question_prefecture.population - total_population).abs
+    @question_prefecture = Prefecture.find(params[:question_prefecture_id])
+    @selected_options = params[:answers].map(&:to_i)
+    selected_prefectures = Prefecture.where(id: @selected_options)
+    @total_population = selected_prefectures.sum(:population)
+    @difference = (@question_prefecture.population - @total_population).abs
+    @all_options = Prefecture.all
   end
 end

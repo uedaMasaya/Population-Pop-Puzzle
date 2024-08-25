@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :contacts, only: [:new, :create]
   resource :profile, only: :show, controller: 'users'
 
+  resources :questions, only: [:show, :result]
+  
   get 'question', to: 'questions#show'
   post 'result', to: 'questions#result'
 end
