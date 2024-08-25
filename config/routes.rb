@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
+  get 'contacts/new'
+  get 'contacts/create'
   devise_for :users
-  root to: "home#index"
+  root 'home#index'
   
-  # 利用規約ページのルート
-  get 'terms', to: 'static_pages#terms', as: 'terms'
+  get 'terms', to: 'home#terms'
+  get 'privacy', to: 'home#privacy'
+  get 'contact', to: 'contacts#new'
   
-  # プライバシーページのルート
-  get 'privacy', to: 'static_pages#privacy', as: 'privacy'
-  
-  # お問い合わせページのルート
-  get 'contact', to: 'static_pages#contact', as: 'contact'
+  resources :contacts, only: [:new, :create]
   
   # 他のルート設定
 end

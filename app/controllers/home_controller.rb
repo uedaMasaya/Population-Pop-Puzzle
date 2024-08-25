@@ -9,4 +9,8 @@ class HomeController < ApplicationController
   def privacy
     # privacyアクションの内容
   end
+
+  def contact
+    # contactアクションの内容
+  end
 end
