@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+    font-family: 'Baloo 2', cursive;
+  }
+  
+   .dropdown-toggle {
+      color: white;
+    }

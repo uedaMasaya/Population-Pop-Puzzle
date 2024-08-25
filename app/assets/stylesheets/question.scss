@@ -1,3 +1,46 @@
-// Place all the styles related to the Question controller here.
+// Place all the styles related to the Questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+body {
+    background-color: #f0f8ff;
+  }
+  
+  .container {
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .question {
+    margin-bottom: 20px; /* 出題文と解答の選択肢の間に余白を追加 */
+  }
+  
+  .question h2 {
+    color: #007bff;
+    font-size: 1.2rem; /* フォントサイズを小さくする */
+  }
+  
+  .answer-options {
+    margin-bottom: 20px; /* 解答の選択肢と解答ボタンの間に余白を追加 */
+  }
+  
+  .form-check-label {
+    color: #007bff;
+    font-size: 1.1rem; /* 解答の選択肢のフォントサイズを大きくする */
+  }
+  
+  .submit-button {
+    margin-top: 20px; /* 解答ボタンの上に余白を追加 */
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }

@@ -72,6 +72,17 @@
       </div>
     <% end %>
 
+      <div style="margin-top: 50px;"></div>
 
+      <% if params[:question_count].to_i == 2 %>
+        <h2>1問目の誤差</h2>
+        <p><%= (@differences[0].abs / 10000.0).round(2) %>万人</p>
+      <% elsif params[:question_count].to_i == 3 %>
+        <h2>1問目の誤差</h2>
+        <p><%= (@differences[0].abs / 10000.0).round(2) %>万人</p>
+        <h2>2問目の誤差</h2>
+        <p><%= (@differences[1].abs / 10000.0).round(2) %>万人</p>
+      <% end %>
+    </div>
   </body>
 </html>
