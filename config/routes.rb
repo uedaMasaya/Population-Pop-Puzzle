@@ -1,3 +1,14 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'home#index'
+  
+  # 利用規約ページのルート
+  get 'terms', to: 'static_pages#terms', as: 'terms'
+  
+  # プライバシーページのルート
+  get 'privacy', to: 'static_pages#privacy', as: 'privacy'
+  
+  # お問い合わせページのルート
+  get 'contact', to: 'static_pages#contact', as: 'contact'
+  
+  # 他のルート設定
 end
