@@ -1,24 +1,32 @@
 <body>
-  <div class="container mt-5">
-    <% if flash[:alert] %>
-      <div class="alert alert-danger"><%= flash[:alert] %></div>
-    <% end %>
+  <div class="container mt-5">  <!-- Bootstrapのコンテナ -->
+  <% if flash[:alert] %>
+    <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <% end %>
     <div class="question-count mb-2">
-      <h3>1問目</h3>
+      <h3><%= params[:question_count] || 1 %>問目</h3>  <!-- 問題番号表示 -->
     </div>
     <div class="question mb-4">
-      <h2><%= @question_prefecture.name %>（人口：<%= (@question_prefecture.population / 10000.0).round(2) %>万人）と同じ人口になるように、下記の都道府県から選択して下さい</h2>
+      <h2><%= @question_prefecture.name %>（人口：<%= (@question_prefecture.population / 10000.0).round(2) %>万人）と同じ人口になるように、下記の都道府県から選択して下さい</h2>  <!-- 問題文表示 -->
     </div>
     <div class="answer-options mb-4">
-      <%= form_with url: result_path, method: :post, local: true do %>
-        <%= hidden_field_tag :question_prefecture_id, @question_prefecture.id %>
+      <%= form_with url: result_questions_path, method: :post, local: true do %>  <!-- フォーム開始 -->
+        <%= hidden_field_tag :question_prefecture_id, @question_prefecture.id %>  <!-- 隠しフィールド（問題の都道府県ID） -->
+        <%= hidden_field_tag :question_count, params[:question_count] || 1 %>  <!-- 隠しフィールド（問題番号） -->
         <% @answer_options.each do |option| %>
-          <div class="form-check">
-            <%= check_box_tag "answers[]", option.id, false, id: "answers_#{option.id}", class: 'form-check-input' %>
-            <%= label_tag "answers_#{option.id}", option.name, class: 'form-check-label' %>
-          </div>
+          <%= hidden_field_tag 'answer_option_ids[]', option.id %>  <!-- 隠しフィールド（選択肢のID） -->
         <% end %>
-        <%= submit_tag '解答', class: 'btn btn-primary mt-3' %>
+        <div class="row">
+          <% @answer_options.each do |option| %>
+            <div class="col-md-3">
+              <div class="form-check">
+                <%= check_box_tag "answers[]", option.id, false, id: "answers_#{option.id}", class: 'form-check-input' %>  <!-- チェックボックス -->
+                <%= label_tag "answers_#{option.id}", option.name, class: 'form-check-label' %>  <!-- チェックボックスのラベル -->
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <%= submit_tag '解答', class: 'btn btn-primary mt-3' %>  <!-- 解答ボタン -->
       <% end %>
     </div>
   </div>

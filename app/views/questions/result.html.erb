@@ -64,25 +64,14 @@
       </div>
     <% else %>
       <div style="background-color: #f0f8ff; border: 2px solid #000; padding: 20px; font-family: 'Arial', sans-serif; text-align: center;">
-      <%= form_with url: question_path(id: params[:question_count].to_i + 1), method: :get, local: true do %>
-        <%= hidden_field_tag :question_count, params[:question_count].to_i + 1 %>
-        <%= hidden_field_tag :answer_options, params[:answer_options] %>
-        <button class="btn btn-primary mt-3" type="submit" style="font-size: 1.2em; font-weight: bold;">次の問題へ</button>
-      <% end %>
+        <%= form_with url: questions_path, method: :get, local: true do %>
+          <%= hidden_field_tag :question_count, params[:question_count].to_i + 1 %>
+          <%= hidden_field_tag :answer_options, params[:answer_options] %>
+          <button class="btn btn-primary mt-3" type="submit" style="font-size: 1.2em; font-weight: bold;">次の問題へ</button>
+        <% end %>
       </div>
     <% end %>
 
-      <div style="margin-top: 50px;"></div>
 
-      <% if params[:question_count].to_i == 2 %>
-        <h2>1問目の誤差</h2>
-        <p><%= (@differences[0].abs / 10000.0).round(2) %>万人</p>
-      <% elsif params[:question_count].to_i == 3 %>
-        <h2>1問目の誤差</h2>
-        <p><%= (@differences[0].abs / 10000.0).round(2) %>万人</p>
-        <h2>2問目の誤差</h2>
-        <p><%= (@differences[1].abs / 10000.0).round(2) %>万人</p>
-      <% end %>
-    </div>
   </body>
 </html>
