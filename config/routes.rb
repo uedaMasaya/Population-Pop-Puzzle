@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  devise_for :users
+  root to: "home#index"
   
   # 利用規約ページのルート
   get 'terms', to: 'static_pages#terms', as: 'terms'
