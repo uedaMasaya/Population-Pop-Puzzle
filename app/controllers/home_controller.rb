@@ -1,16 +1,5 @@
 class HomeController < ApplicationController
   def index
-  end
-  
-  def terms
-    # termsアクションの内容
-  end
-
-  def privacy
-    # privacyアクションの内容
-  end
-
-  def contact
-    # contactアクションの内容
+    @rankings = Score.joins(:user).order(score: :asc).limit(10)
   end
 end

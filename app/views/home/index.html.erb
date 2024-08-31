@@ -1,4 +1,30 @@
 <div class="text-center">
   <h1>Population Pop Puzzle</h1>
   <%= link_to 'START', question_path(1, question_count: params[:question_count] || 1), class: 'btn btn-primary btn-lg my-4 shadow' %>
+
+  <h2 class="mt-5">得点ランキング</h2> <!-- ここにクラスを追加 -->
+  <div class="ranking-table">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-2"><strong>順位</strong></div>
+          <div class="col-6"><strong>ユーザー</strong></div>
+          <div class="col-4"><strong>得点</strong></div>
+        </div>
+      </li>
+      <% if @rankings.present? %>
+        <% @rankings.each_with_index do |ranking, index| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-2"><%= index + 1 %></div>
+              <div class="col-6"><%= ranking.user.name %></div>
+              <div class="col-4 text-right"><%= number_with_delimiter(ranking.score) %></div>
+            </div>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="list-group-item">ランキングはありません</li>
+      <% end %>
+    </ul>
+  </div>
 </div>
