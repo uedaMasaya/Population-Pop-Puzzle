@@ -1,102 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>PopulationPopPuzzle</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+  <head>
+    <title>PopulationPopPuzzle</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preload" href="http://localhost:3000/packs/js/application-a0ed82f2e41efaf244e1.js" as="script">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet"> <!-- 追加 -->
+    <link rel="icon" href="<%= asset_path 'logo.png' %>" type="image/png"> <!-- 追加 -->
+  </head>
 
-  <style>
-    body {
-      font-family: 'Baloo 2', sans-serif;
-    }
-    .bg-secondary {
-      background-color: #6c757d;
-    }
-    .text-white {
-      color: #fff;
-    }
-    .p-3 {
-      padding: 1rem;
-    }
-    .d-flex {
-      display: flex;
-    }
-    .justify-content-between {
-      justify-content: space-between;
-    }
-    .align-items-center {
-      align-items: center;
-    }
-    .ml-auto {
-      margin-left: auto;
-    }
-    .dropdown-menu-right {
-      right: 0;
-      left: auto;
-    }
-    .container {
-      margin-top: 3rem;
-    }
-    .alert {
-      padding: 0.75rem 1.25rem;
-      margin-bottom: 1rem;
-      border: 1px solid transparent;
-      border-radius: 0.25rem;
-    }
-    .alert-success {
-      color: #155724;
-      background-color: #d4edda;
-      border-color: #c3e6cb;
-    }
-    .alert-danger {
-      color: #721c24;
-      background-color: #f8d7da;
-      border-color: #f5c6cb;
-    }
-    footer {
-      margin-top: 3rem;
-    }
-  </style>
-</head>
-
-<body>
-<header class="bg-secondary text-white p-3 d-flex justify-content-between align-items-center">
+  <body>
+  <header class="bg-secondary text-white p-3 d-flex justify-content-between align-items-center">
   <div>
-    PopulationPopPuzzle
+    <%= link_to 'PopulationPopPuzzle', root_path, class: 'text-white' %>
   </div>
   <div class="ml-auto dropdown">
-    <a class="dropdown-toggle" href="#" id="guestDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      ゲスト
-    </a>
-    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="guestDropdown">
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
+      <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= current_user.name %>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+        <%= link_to 'プロフィール詳細', profile_path(current_user), class: 'dropdown-item' %>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
-      <% else %>
+      </div>
+    <% else %>
+      <a class="dropdown-toggle" href="#" id="guestDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        ゲスト
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="guestDropdown">
         <%= link_to 'ログイン', new_user_session_path, class: 'dropdown-item' %>
-        <%= link_to 'サインアップ', new_user_registration_path, class: 'dropdown-item' %>
-      <% end %>
-    </div>
+        <%= link_to '新規登録', new_user_registration_path, class: 'dropdown-item' %>
+      </div>
+    <% end %>
   </div>
-</header>
+  </header>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+  <div class="container mt-5">
+  <% flash.each do |key, value| %>
+    <div class="flash <%= key %> alert alert-<%= key == 'notice' ? 'success' : 'danger' %>"><%= value %></div>
+  <% end %>
+  <%= yield %>
+</div>
 
-<%= yield %>
+    <footer class="bg-secondary text-white text-center p-3 mt-5">
+      <%= link_to '利用規約', terms_path, class: 'text-white' %> |
+      <%= link_to 'プライバシー', privacy_path, class: 'text-white' %> |
+      <%= link_to 'お問い合わせ', contact_path, class: 'text-white' %>
+    </footer>
 
-<footer class="bg-secondary text-white text-center p-3 mt-5">
-  &copy; 2023 PopulationPopPuzzle
-</footer>
-
-<footer class="bg-secondary text-white text-center p-3 mt-5">
-  <%= link_to '利用規約', terms_path, class: 'text-white' %> |
-  <%= link_to 'プライバシー', privacy_path, class: 'text-white' %> |
-  <%= link_to 'お問い合わせ', contact_path, class: 'text-white' %>
-</footer>
-
-</body>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
 </html>
