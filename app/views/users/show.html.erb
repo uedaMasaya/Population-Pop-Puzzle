@@ -1,3 +1,13 @@
 <h1>プロフィール</h1>
-<p>名前: <%= @user.name %></p>
-<p>メール: <%= @user.email %></p>
+
+<div style="display: flex;">
+  <div style="flex: 1; text-align: center;">
+    <%= image_tag(@user.avatar.thumb.url.presence || asset_path('default_avatar.png'), alt: "プロフィール画像", style: "border-radius: 50%; max-width: 200px; height: auto;") %>
+  </div>
+
+  <div style="flex: 1; padding-left: 20px;">
+    <p>名前: <%= @user.name %></p>
+    <p>メール: <%= @user.email %></p>
+    <p>登録日時: <%= @user.created_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
+  </div>
+</div>

@@ -25,6 +25,12 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
 gem 'rails-i18n', '~> 6.0'
 
+gem 'carrierwave', '1.3.4'
+gem 'mini_magick', '5.0.1'
+gem 'mime-types', '3.5.2'
+gem 'ssrf_filter', '1.0.8'
+gem 'mime-types-data', '3.2024.0820'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
