@@ -30,6 +30,7 @@ gem 'mini_magick', '5.0.1'
 gem 'mime-types', '3.5.2'
 gem 'ssrf_filter', '1.0.8'
 gem 'mime-types-data', '3.2024.0820'
+gem 'omniauth-twitter', '1.4.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
