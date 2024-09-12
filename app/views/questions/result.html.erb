@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PopulationPopPuzzle</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h1>結果</h1>
+      <p>
+        <span style="color: red; font-size: 1.5em;"><%= @question_prefecture.name %></span>
+        との誤差は
+        <span style="color: <%= @difference >= 0 ? 'blue' : 'red' %>; font-size: 1.5em;">
+          <%= @difference >= 0 ? '+' : '-' %><%= (@difference.abs / 10000.0).round(2) %>万人
+          <%= @difference >= 0 ? '（超過）' : '（不足）' %>
+        </span>
+        です。
+      </p>
+
+      <div style="margin-top: 20px;"></div>
+
+      <p>出題都道府県:&nbsp;&nbsp;<%= @question_prefecture.name %>&nbsp;&nbsp;:&nbsp;&nbsp;人口:&nbsp;<%= (@question_prefecture.population / 10000.0).round(2) %>万人</p>
+      <p>選択した都道府県の合計人口: <%= (@total_population / 10000.0).round(2) %>万人</p>
+      
+      <div style="margin-top: 50px;"></div>
+      
+      <h2 style="font-size: 1.25em;">【選択した都道府県】</h2>
+      <div class="row">
+        <% @all_options.each do |option| %>
+          <% if @selected_options.include?(option.id) %>
+            <div class="col-md-3">
+              <p><%= option.name %>: <%= (option.population / 10000.0).round(2) %>万人</p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div style="margin-top: 50px;"></div>
+
+      <h2 style="font-size: 1.25em;">【選択していない都道府県】</h2>
+      <div class="row">
+        <% @all_options.each do |option| %>
+          <% unless @selected_options.include?(option.id) %>
+            <div class="col-md-3">
+              <p><%= option.name %>: <%= (option.population / 10000.0).round(2) %>万人</p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div style="margin-top: 20px;"></div>
+
+      <% if params[:question_count].to_i >= 3 %>
+      <div style="background-color: #f0f8ff; border: 2px solid #000; padding: 20px; font-family: 'Arial', sans-serif; text-align: center;">
+        <p style="font-size: 1.5em; font-weight: bold;">合計ズレ: <%= (@total_difference / 10_000.0).round(1) %>万人</p>
+        <%= link_to '問題終了です<br><br>TOPへ戻る'.html_safe, root_path, class: 'btn btn-primary mt-3', style: 'font-size: 1.2em; font-weight: bold;' %>
+      </div>
+    <% else %>
+      <div style="background-color: #f0f8ff; border: 2px solid #000; padding: 20px; font-family: 'Arial', sans-serif; text-align: center;">
+        <%= form_with url: questions_path, method: :get, local: true do %>
+          <%= hidden_field_tag :question_count, params[:question_count].to_i + 1 %>
+          <%= hidden_field_tag :answer_options, params[:answer_options] %>
+          <button class="btn btn-primary mt-3" type="submit" style="font-size: 1.2em; font-weight: bold;">次の問題へ</button>
+        <% end %>
+      </div>
+    <% end %>
+
+      <div style="margin-top: 50px;"></div>
+
+      <% if params[:question_count].to_i == 2 %>
+        <h2>1問目の誤差</h2>
+        <p><%= (@differences[0].abs / 10000.0).round(2) %>万人</p>
+      <% elsif params[:question_count].to_i == 3 %>
+        <h2>1問目の誤差</h2>
+        <p><%= (@differences[0].abs / 10000.0).round(2) %>万人</p>
+        <h2>2問目の誤差</h2>
+        <p><%= (@differences[1].abs / 10000.0).round(2) %>万人</p>
+      <% end %>
+    </div>
+  </body>
+</html>

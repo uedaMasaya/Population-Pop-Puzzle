@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PopulationPopPuzzle</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <% if flash[:alert] %>
+        <div class="alert alert-danger"><%= flash[:alert] %></div>
+      <% end %>
+      <div class="question-count mb-2">
+        <h3><%= params[:question_count] || 1 %>問目</h3>
+      </div>
+      <div class="question mb-4">
+        <h2><%= @question_prefecture.name %>（人口：<%= (@question_prefecture.population / 10000.0).round(2) %>万人）と同じ人口になるように、下記の都道府県から選択して下さい</h2>
+      </div>
+      <div class="answer-options mb-4">
+        <%= form_with url: result_questions_path, method: :post, local: true do %>
+          <%= hidden_field_tag :question_prefecture_id, @question_prefecture.id %>
+          <%= hidden_field_tag :question_count, params[:question_count] || 1 %>
+          <% @answer_options.each do |option| %>
+            <%= hidden_field_tag 'answer_option_ids[]', option.id %>
+          <% end %>
+          <div class="row">
+            <% @answer_options.each do |option| %>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <%= check_box_tag "answers[]", option.id, false, id: "answers_#{option.id}", class: 'form-check-input' %>
+                  <%= label_tag "answers_#{option.id}", option.name, class: 'form-check-label' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <%= submit_tag '解答', class: 'btn btn-primary mt-3' %>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>
